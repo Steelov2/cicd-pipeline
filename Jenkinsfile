@@ -3,7 +3,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Steelov2/cicd-pipeline.git', branch: 'main', credentialsId: 'github'
+                script {
+                    git branch: 'main',
+                        credentialsId: 'git_hub_credentials',
+                        url: 'https://github.com/Steelov2/cicd-pipeline.git'
+                }
             }
         }
         stage('Build Application') {
