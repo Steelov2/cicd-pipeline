@@ -1,33 +1,26 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-                sh 'git clone https://github.com/Steelov2/cicd-pipeline.git'
+                git url: 'https://github.com/Steelov2/cicd-pipeline.git'
             }
         }
-
         stage('Build Application') {
             steps {
-                sh 'chmod +x scripts/build.sh'
                 sh 'script scripts/build.sh'
             }
         }
-
         stage('Run Tests') {
             steps {
-                sh 'chmod +x scripts/test.sh'
                 sh 'script scripts/test.sh'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t bolatovmslm/mybuildimage .'
             }
         }
-
         stage('Push Docker Image') {
             steps {
                 withDockerRegistry([url: 'https://registry.hub.docker.com', credentialsId: 'docker_hub_creds_id']) {
