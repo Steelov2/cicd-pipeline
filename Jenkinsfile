@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Steelov2/cicd-pipeline.git'
+                sh 'git clone https://github.com/Steelov2/cicd-pipeline.git'
             }
         }
 
